@@ -18,7 +18,9 @@ export class King extends Figure
         if(!super.canMove(target)) return false;
         const dx = Math.abs(this.cell.x - target.x);
         const dy = Math.abs(this.cell.y - target.y);
-
-        return (dx === 1 && dy === 1) || (dx === 0 && dy === 1) || (dx === 1 && dy === 0);
+        if(this.cell.isEmptyVertical(target)) return (dx === 0 && dy === 1);
+        if(this.cell.isEmptyHorizontal(target)) return (dx === 1 && dy === 0);
+        if(this.cell.isEmptyDiagonal(target)) return (dx === 1 && dy === 1);
+        return false;
     }
 }
